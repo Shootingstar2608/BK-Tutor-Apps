@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Bell, ChevronDown, LogOut, User } from 'lucide-react';
 import heroBg from '../assets/slbk.jpg';
 import logoBKTutor from '../assets/logo.png';
+import ChatbotWidget from '../components/ChatbotWidget';
 
 const studentFeatures = [
   {
@@ -196,6 +197,9 @@ const StudentHomePage = () => {
           </button>
         </div>
       </section>
+
+      {/* Chatbot Widget */}
+      <ChatbotWidget />
     </div>
   );
 };
