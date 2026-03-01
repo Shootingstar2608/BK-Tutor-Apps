@@ -1,38 +1,46 @@
-# LO4-SonTung-CNPM
-Tóm tắt nhanh cái khung sườn
+# 🎓 BK Tutor Platform
 
-**Mục đích**: Tài liệu ngắn gọn này tóm tắt các điểm cần lưu ý khi phát triển và tích hợp frontend/backend.
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![Flask](https://img.shields.io/badge/Flask-Backend-black?logo=flask)
+![React](https://img.shields.io/badge/React-Frontend-blue?logo=react)
+![Tailwind](https://img.shields.io/badge/Tailwind-CSS-38B2AC?logo=tailwind-css)
 
-**1. Database (HashMap - dev)**
-- **Cách truy cập**: import `db` từ `core/database.py` (biến toàn cục).
-- **Sử dụng**: Thêm bảng/key mới cho module của bạn: `db['appointments']`, `db['schedules']`, `db['feedbacks'] = {}`.
-- **Lưu ý**: Đây là lưu trữ tạm (HashMap). Server restart sẽ mất dữ liệu — dùng `init_db()` để seed dữ liệu mẫu khi cần.
+A comprehensive, full-stack university tutoring management system designed to streamline the scheduling, booking, and document-sharing processes between students and tutors. The platform features an intelligent chatbot, Single Sign-On (SSO) integration, and automated data synchronization.
 
-**2. Bảo vệ API (Phân quyền)**
-- **Decorator**: Dùng `@require_role(...)` từ `core/security.py` để giới hạn quyền truy cập.
-- **Ví dụ**: API chỉ cho tutor gọi:
-	- `@require_role('TUTOR')`
+## ✨ Key Features
 
-**3. Lấy thông tin user hiện tại**
-- Đừng decode token thủ công. Hệ thống đã xử lý và gán thông tin user vào `flask.g`.
+* **Role-Based Access Control (RBAC):** Distinct workflows for Admins, Tutors, Students, and University Officers.
+* **Smart Scheduling & Booking:** Tutors can open availability slots, and students can book appointments without time conflicts.
+* **Single Sign-On (SSO):** Secure and seamless authentication using the university's SSO system with JWT-based session management.
+* **Resource Sharing Library:** A centralized hub for uploading, searching, and securely sharing academic documents.
+* **AI Chatbot Integration:** An intelligent assistant embedded in the system to answer real-time academic queries.
+* **Automated Data Sync:** Configurable scheduler (APScheduler) for continuous data synchronization and background tasks.
 
-**4. Định nghĩa Model**
-- Các model dùng `dataclass` trong `core/models.py`.
-- Nếu cần model mới (ví dụ `Feedback`, `Report`), thêm vào đây hoặc file model riêng nhưng giữ format `dataclass`.
+## 🛠️ Tech Stack
 
-**5. Ghi chú cho Frontend (FE)**
-- **Base URL (dev)**: `http://localhost:5000`.
-- **Header bắt buộc**: `Authorization: Bearer <access_token>` (có khoảng trắng sau `Bearer`).
+**Backend (RESTful API):**
+* Python 3.x, Flask (Blueprints architecture)
+* SQLite/PostgreSQL (Database)
+* APScheduler (Background tasks & cron jobs)
+* JWT (JSON Web Tokens) & bcrypt (Security)
 
-**6. Các API Auth chính (tổng quan)**
-- `POST /auth/login` — body: `{ "email":..., "password":... }` → trả `access_token`.
-- `POST /auth/register` — body: `{ "name":..., "email":..., "password":... }` → user mới mặc định role `PENDING`.
-- `POST /auth/grant-role` — **Chỉ Admin**: dùng `Authorization: Bearer <token_admin>` để cấp role cho user (`TUTOR` hoặc `STUDENT`).
+**Frontend (SPA):**
+* React.js (Vite)
+* Tailwind CSS
+* React Router DOM
 
-**7. Seed / Test accounts**
-- Có một số tài khoản test đã được tạo sẵn — dùng để kiểm thử nhanh mà không cần đăng ký.
+## 📁 Project Structure
 
-**Tóm tắt hành động nhanh**
-- Backend: import `db`, dùng `require_role`, thêm model bằng `dataclass`, seed dữ liệu khi cần.
-- Frontend: gửi token trong header `Authorization`, gọi các endpoint auth để nhận token.
-
+```text
+BK-Tutor-Apps/
+├── backend/
+│   ├── core/              # Database mock, Models, and Security/Auth logic
+│   ├── modules/           # Feature blueprints (auth, scheduling, library, chatbot, admin)
+│   ├── API_SHEET.md       # Detailed API documentation for Frontend
+│   ├── app.py             # Flask application entry point
+│   └── requirements.txt   # Python dependencies
+└── frontend/
+    ├── src/               # React components, pages, and assets
+    ├── public/            # Static files
+    ├── package.json       # Node.js dependencies
+    └── tailwind.config.js # Tailwind CSS configuration
