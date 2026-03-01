@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import heroBg from '../assets/slbk.jpg';
@@ -10,7 +11,7 @@ const SessionReportsPage = () => {
   useEffect(() => {
     const token = localStorage.getItem('access_token');
     const headers = token ? { Authorization: `Bearer ${token}` } : {};
-    fetch('http://127.0.0.1:5000/info/appointments', { headers })
+    fetch(`${API_BASE}/info/appointments`, { headers })
       .then((r) => (r.ok ? r.json() : Promise.resolve({ appointments: [] })))
       .then((b) => setAppointments(b.appointments || []))
       .catch(() => setAppointments([]));

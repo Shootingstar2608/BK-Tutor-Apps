@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Link, useNavigate } from 'react-router-dom';
@@ -19,7 +20,7 @@ const UserInfoPage = () => {
     }
 
     try {
-      const res = await fetch('http://127.0.0.1:5000/auth/profile', {
+      const res = await fetch(`${API_BASE}/auth/profile`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
 
@@ -38,7 +39,7 @@ const UserInfoPage = () => {
     const token = localStorage.getItem('access_token');
     
     try {
-      const res = await fetch(`http://127.0.0.1:5000/info/users/${userData.id}`, {
+      const res = await fetch(`${API_BASE}/info/users/${userData.id}`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`,

@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useState, useMemo, useEffect } from 'react';
 import { Bell, ChevronDown, User, Calendar, Settings, LogOut } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
@@ -69,7 +70,7 @@ const Header = () => {
         const token = localStorage.getItem('access_token');
         if (!token) return;
 
-        const res = await fetch('http://127.0.0.1:5000/info/notifications/my', {
+        const res = await fetch(`${API_BASE}/info/notifications/my`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         
@@ -92,7 +93,7 @@ const Header = () => {
   const markAsRead = async (notificationId) => {
     try {
       const token = localStorage.getItem('access_token');
-      const res = await fetch(`http://127.0.0.1:5000/info/notifications/${notificationId}/read`, {
+      const res = await fetch(`${API_BASE}/info/notifications/${notificationId}/read`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` }
       });

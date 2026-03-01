@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,7 +14,6 @@ const FeedbackPage = () => {
   useEffect(() => {
     const token = localStorage.getItem('access_token');
     const userId = localStorage.getItem('user_id');
-    const API_BASE = 'http://127.0.0.1:5000';
 
     if (!userId) {
       setLoading(false);
@@ -52,7 +52,6 @@ const FeedbackPage = () => {
     setSubmitting(true);
     const token = localStorage.getItem('access_token');
     const studentId = localStorage.getItem('user_id');
-    const API_BASE = 'http://127.0.0.1:5000';
     fetch(`${API_BASE}/info/appointments/${selected.id}/feedback`, {
       method: 'POST',
       headers: {

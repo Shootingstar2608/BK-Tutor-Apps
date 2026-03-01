@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import heroBg from '../assets/slbk.jpg';
@@ -16,8 +17,8 @@ const DepartmentStatsPage = () => {
     const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
     Promise.all([
-      fetch('http://127.0.0.1:5000/info/appointments', { headers }).then(r => r.ok ? r.json() : { appointments: [] }),
-      fetch('http://127.0.0.1:5000/info/users', { headers }).then(r => r.ok ? r.json() : { users: [] })
+      fetch(`${API_BASE}/info/appointments`, { headers }).then(r => r.ok ? r.json() : { appointments: [] }),
+      fetch(`${API_BASE}/info/users`, { headers }).then(r => r.ok ? r.json() : { users: [] })
     ]).then(([apptsBody, usersBody]) => {
       const appts = apptsBody.appointments || [];
       const us = usersBody.users || [];
@@ -74,7 +75,7 @@ const DepartmentStatsPage = () => {
       scholarship_level: form.scholarship_level || null
     };
 
-    const res = await fetch(`http://127.0.0.1:5000/info/users/${selectedStudent.id}`, {
+    const res = await fetch(`${API_BASE}/info/users/${selectedStudent.id}`, {
       method: 'PATCH',
       headers,
       body: JSON.stringify(body)
@@ -110,7 +111,7 @@ const DepartmentStatsPage = () => {
     if (updates.conduct_points) message += `- Điểm rèn luyện: ${updates.conduct_points}\n`;
     if (updates.scholarship_level) message += `- Học bổng: ${updates.scholarship_level}`;
 
-    await fetch('http://127.0.0.1:5000/info/notifications', {
+    await fetch(`${API_BASE}/info/notifications`, {
       method: 'POST',
       headers,
       body: JSON.stringify({

@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +21,7 @@ const FreeSchedulePage = () => {
     const fetchSchedule = async () => {
       if (!token) return;
       try {
-        const res = await fetch(`http://127.0.0.1:5000/appointments/free-schedule?week=${currentWeek}`, {
+        const res = await fetch(`${API_BASE}/appointments/free-schedule?week=${currentWeek}`, {
           method: 'GET',
           headers: { 
             'Content-Type': 'application/json',
@@ -49,7 +50,7 @@ const FreeSchedulePage = () => {
 
     const saveWeek = async (week) => {
         // Hàm này xử lý việc gọi API lưu lịch cho tuần chỉ định
-        const response = await fetch('http://127.0.0.1:5000/appointments/free-schedule', {
+        const response = await fetch(`${API_BASE}/appointments/free-schedule`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

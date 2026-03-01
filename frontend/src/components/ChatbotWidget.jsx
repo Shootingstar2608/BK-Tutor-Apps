@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send } from 'lucide-react';
 
@@ -39,7 +40,7 @@ const ChatbotWidget = () => {
 
     try {
       const token = localStorage.getItem('access_token');
-      const res = await fetch('http://127.0.0.1:5000/chat/message', {
+      const res = await fetch(`${API_BASE}/chat/message`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

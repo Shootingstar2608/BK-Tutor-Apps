@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import { ChevronDown } from 'lucide-react';
@@ -70,7 +71,7 @@ const OpenSessionPage = () => {
             }
 
             // --- BƯỚC 2: GỌI API ---
-            const response = await fetch('http://127.0.0.1:5000/appointments/', {
+            const response = await fetch(`${API_BASE}/appointments/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

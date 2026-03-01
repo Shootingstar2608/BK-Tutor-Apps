@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import { Link, useNavigate } from 'react-router-dom';
@@ -76,7 +77,7 @@ const ResourcePage = () => {
 
     try {
       // 2. Gọi API Upload
-      const response = await fetch('http://127.0.0.1:5000/library/upload', {
+      const response = await fetch(`${API_BASE}/library/upload`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

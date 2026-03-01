@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
@@ -25,7 +26,7 @@ const BookingPage = () => {
       }
 
       try {
-        const res = await fetch(`http://127.0.0.1:5000/appointments/?tutor_id=${selectedTutorId}`);
+        const res = await fetch(`${API_BASE}/appointments/?tutor_id=${selectedTutorId}`);
         if (res.ok) {
           const data = await res.json();
           
@@ -52,7 +53,7 @@ const BookingPage = () => {
     if (!token) return navigate('/login');
 
     try {
-      const res = await fetch(`http://127.0.0.1:5000/appointments/${aptId}/book`, {
+      const res = await fetch(`${API_BASE}/appointments/${aptId}/book`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` }
       });

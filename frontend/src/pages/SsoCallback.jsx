@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -39,7 +40,7 @@ const SsoCallback = () => {
         (async () => {
           let destination = defaultRoute;
           try {
-            const resp = await fetch('http://127.0.0.1:5000/auth/profile', {
+            const resp = await fetch(`${API_BASE}/auth/profile`, {
               method: 'GET',
               headers: { 'Authorization': `Bearer ${token}` }
             });
