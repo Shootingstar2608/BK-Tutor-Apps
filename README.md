@@ -18,29 +18,60 @@ A comprehensive, full-stack university tutoring management system designed to st
 
 ## 🛠️ Tech Stack
 
-**Backend (RESTful API):**
-* Python 3.x, Flask (Blueprints architecture)
-* SQLite/PostgreSQL (Database)
-* APScheduler (Background tasks & cron jobs)
-* JWT (JSON Web Tokens) & bcrypt (Security)
+**Backend:**
+* Framework: Flask (Blueprints architecture)
+* Database: in-memory `core/database.py` for dev (Data models including User, Role, Appointment, Document)
+* Authentication: JWT & bcrypt
 
-**Frontend (SPA):**
+**Frontend:**
 * React.js (Vite)
 * Tailwind CSS
 * React Router DOM
 
-## 📁 Project Structure
+## 🚀 Getting Started
 
-```text
-BK-Tutor-Apps/
-├── backend/
-│   ├── core/              # Database mock, Models, and Security/Auth logic
-│   ├── modules/           # Feature blueprints (auth, scheduling, library, chatbot, admin)
-│   ├── API_SHEET.md       # Detailed API documentation for Frontend
-│   ├── app.py             # Flask application entry point
-│   └── requirements.txt   # Python dependencies
-└── frontend/
-    ├── src/               # React components, pages, and assets
-    ├── public/            # Static files
-    ├── package.json       # Node.js dependencies
-    └── tailwind.config.js # Tailwind CSS configuration
+Follow these instructions to get a copy of the project up and running on your local machine.
+
+### Prerequisites
+* Python 3.8+
+* Node.js (v16+) & npm
+
+### 1. Backend Setup
+Navigate to the `backend` directory, install the required Python packages, and start the Flask server. It will run on `port 5000` by default.
+
+```bash
+cd backend
+pip install -r requirements.txt
+python app.py
+```
+
+### 2. Frontend Setup
+Navigate to the `frontend` directory, install the Node modules, and start the Vite development server:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+## 📖 API Documentation (Summary)
+
+The backend follows a strict RESTful architecture. Timestamps are formatted as `YYYY-MM-DD HH:MM:SS`. Below are the core endpoints:
+
+**Authentication & Profile:**
+* `GET /auth/sso/login-url`: Retrieve SSO login URL.
+* `GET /auth/profile`: Get the current user's profile (Requires Bearer JWT).
+* `POST /auth/logout`: Logout and invalidate token.
+
+**Appointments (Scheduling):**
+* `GET /appointments/`: List available sessions (Filterable by `tutor_id`).
+* `POST /appointments/`: Create a new session (TUTOR role required).
+* `POST /appointments/<apt_id>/book`: Book an existing session (STUDENT role required).
+
+**Library & Documents:**
+* `GET /library/`: Search and filter documents.
+* `POST /library/upload`: Upload a new document record.
+
+**Admin & Sync:**
+* `GET /admin/users`: List all users (ADMIN role required).
+* `POST /admin/grant-role`: Update user roles.
