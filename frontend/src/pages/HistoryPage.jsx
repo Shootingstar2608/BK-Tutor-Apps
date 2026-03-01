@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { Link, useNavigate } from 'react-router-dom';
@@ -12,7 +13,7 @@ const HistoryPage = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/library/history', {
+        const response = await fetch(`${API_BASE}/library/history`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (response.ok) {

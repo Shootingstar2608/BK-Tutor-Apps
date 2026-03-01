@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom'; // Thêm useLocation
 import Header from '../components/Header';
@@ -51,12 +52,12 @@ const MeetingPage = () => {
     const fetchMeetings = async () => {
       setLoading(true);
       try {
-        let url = 'http://127.0.0.1:5000/appointments/';
+        let url = `${API_BASE}/appointments/`;
         
         // BƯỚC 1: Lọc theo Tutor ID nếu vai trò là TUTOR
         if (roleUpper === 'TUTOR' && tutorId) {
             // Nếu là Tutor, chỉ lấy lịch của Tutor đó bằng cách thêm query param
-            url = `http://127.0.0.1:5000/appointments/?tutor_id=${tutorId}`;
+            url = `${API_BASE}/appointments/?tutor_id=${tutorId}`;
         }
         // Nếu là STUDENT, URL vẫn giữ nguyên để lấy tất cả lịch (cho tab Đăng ký mới)
         

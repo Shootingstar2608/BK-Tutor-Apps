@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 // frontend/src/pages/RegisterPage.jsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -45,7 +46,7 @@ const RegisterPage = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('http://127.0.0.1:5000/auth/register', {
+      const res = await fetch(`${API_BASE}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

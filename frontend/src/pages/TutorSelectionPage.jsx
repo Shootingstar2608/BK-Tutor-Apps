@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
@@ -21,7 +22,7 @@ const TutorSelectionPage = () => {
   useEffect(() => {
     const fetchTutors = async () => {
       try {
-        const res = await fetch('http://127.0.0.1:5000/auth/tutors');
+        const res = await fetch(`${API_BASE}/auth/tutors`);
         if (res.ok) {
           const data = await res.json();
           setTutors(data);

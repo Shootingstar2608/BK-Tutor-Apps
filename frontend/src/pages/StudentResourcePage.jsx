@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import { Search, Filter, ExternalLink, Share2, ArrowLeft } from 'lucide-react';
@@ -71,7 +72,7 @@ const StudentResourcePage = () => {
     setHasSearched(true);
     try {
       const queryParams = new URLSearchParams({ q: keyword, course: courseCode }).toString();
-      const response = await fetch(`http://127.0.0.1:5000/library/?${queryParams}`);
+      const response = await fetch(`${API_BASE}/library/?${queryParams}`);
       if (!response.ok) throw new Error('Failed to fetch');
       const data = await response.json();
       setDocuments(data);
@@ -86,7 +87,7 @@ const StudentResourcePage = () => {
   const handleViewClick = async (doc) => {
     if (token) {
         try {
-            await fetch(`http://127.0.0.1:5000/library/${doc.id}`, {
+            await fetch(`${API_BASE}/library/${doc.id}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
         } catch (e) { console.warn(e); }
@@ -103,7 +104,7 @@ const StudentResourcePage = () => {
   const handleShareSubmit = async (receiverEmail) => {
     if (!selectedDoc) return;
     try {
-      const res = await fetch('http://127.0.0.1:5000/library/share', {
+      const res = await fetch(`${API_BASE}/library/share`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ doc_id: selectedDoc.id, receiver_email: receiverEmail })

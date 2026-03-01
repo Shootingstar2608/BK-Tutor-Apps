@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Bell, ChevronDown, User, LogOut } from 'lucide-react';
@@ -25,22 +26,22 @@ const OfficerHomePage = () => {
 
     const headers = { 'Authorization': `Bearer ${token}` };
 
-    fetch('http://127.0.0.1:5000/info/overview', { headers })
+    fetch(`${API_BASE}/info/overview`, { headers })
       .then(r => r.ok ? r.json() : Promise.resolve(null))
       .then(setOverview)
       .catch(() => {});
 
-    fetch('http://127.0.0.1:5000/info/users', { headers })
+    fetch(`${API_BASE}/info/users`, { headers })
       .then(r => r.ok ? r.json() : Promise.resolve({users:[]}))
       .then(b => setUsers(b.users || []))
       .catch(() => {});
 
-    fetch('http://127.0.0.1:5000/info/appointments', { headers })
+    fetch(`${API_BASE}/info/appointments`, { headers })
       .then(r => r.ok ? r.json() : Promise.resolve({appointments:[]}))
       .then(b => setAppointments(b.appointments || []))
       .catch(() => {});
 
-    fetch('http://127.0.0.1:5000/info/documents', { headers })
+    fetch(`${API_BASE}/info/documents`, { headers })
       .then(r => r.ok ? r.json() : Promise.resolve({documents:[]}))
       .then(b => setDocuments(b.documents || []))
       .catch(() => {});

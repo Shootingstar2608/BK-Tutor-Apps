@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 
@@ -15,7 +16,7 @@ const StudentRescheduleModal = ({ isOpen, onClose, currentSession, onConfirm }) 
       setLoading(true);
       try {
         const tutorId = currentSession.tutor_id;
-        const res = await fetch(`http://127.0.0.1:5000/appointments/?tutor_id=${tutorId}`);
+        const res = await fetch(`${API_BASE}/appointments/?tutor_id=${tutorId}`);
         if (res.ok) {
           const data = await res.json();
           

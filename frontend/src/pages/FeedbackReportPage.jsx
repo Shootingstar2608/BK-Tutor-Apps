@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Star, Calendar, MapPin, User, MessageSquare } from 'lucide-react';
@@ -24,7 +25,7 @@ const FeedbackReportPage = () => {
   const fetchFeedbacks = async () => {
     const token = localStorage.getItem('access_token');
     try {
-      const res = await fetch('http://127.0.0.1:5000/info/feedbacks/all', {
+      const res = await fetch(`${API_BASE}/info/feedbacks/all`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
 

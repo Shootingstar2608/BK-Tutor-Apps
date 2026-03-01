@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useState, useEffect } from 'react';
 import { X, Pencil, CloudUpload, Plus, FileText, Trash2 } from 'lucide-react';
 
@@ -107,7 +108,7 @@ const MinutesModal = ({ isOpen, onClose, sessionData }) => {
     };
 
     try {
-        const res = await fetch(`http://127.0.0.1:5000/appointments/${sessionData?.id}/minutes`, {
+        const res = await fetch(`${API_BASE}/appointments/${sessionData?.id}/minutes`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

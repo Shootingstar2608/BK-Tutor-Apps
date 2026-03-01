@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useState } from 'react';
 import AdminHeader from '../components/AdminHeader';
 import { Link } from 'react-router-dom';
@@ -33,7 +34,7 @@ const UserManagementPage = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('access_token');
-      const res = await fetch('http://127.0.0.1:5000/admin/users', {
+      const res = await fetch(`${API_BASE}/admin/users`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       
@@ -109,7 +110,7 @@ const UserManagementPage = () => {
   const handleRoleChange = async (userId, newRole) => {
     try {
       const token = localStorage.getItem('access_token');
-      const res = await fetch('http://127.0.0.1:5000/admin/grant-role', {
+      const res = await fetch(`${API_BASE}/admin/grant-role`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

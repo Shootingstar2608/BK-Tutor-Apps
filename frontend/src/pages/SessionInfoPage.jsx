@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -27,7 +28,7 @@ const SessionInfoPage = () => {
 
   const fetchSessionDetail = async () => {
     try {
-      const res = await fetch('http://127.0.0.1:5000/appointments/', {
+      const res = await fetch(`${API_BASE}/appointments/`, {
           headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -49,7 +50,7 @@ const SessionInfoPage = () => {
   // --- 1. LOGIC ĐĂNG KÝ (MỚI THÊM) ---
   const handleBookClick = async () => {
     try {
-      const res = await fetch(`http://127.0.0.1:5000/appointments/${id}/book`, {
+      const res = await fetch(`${API_BASE}/appointments/${id}/book`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -86,8 +87,8 @@ const SessionInfoPage = () => {
 
   const confirmCancel = async () => {
       const url = userRole === 'STUDENT' 
-        ? `http://127.0.0.1:5000/appointments/${id}/book`
-        : `http://127.0.0.1:5000/appointments/${id}`;
+        ? `${API_BASE}/appointments/${id}/book`
+        : `${API_BASE}/appointments/${id}`;
 
       try {
           const res = await fetch(url, {
@@ -114,13 +115,13 @@ const SessionInfoPage = () => {
   const handleStudentSwitch = async (newAptId) => {
     setIsStudentSwitchOpen(false);
     try {
-        const cancelRes = await fetch(`http://127.0.0.1:5000/appointments/${id}/book`, {
+        const cancelRes = await fetch(`${API_BASE}/appointments/${id}/book`, {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!cancelRes.ok) throw new Error("Không thể hủy lịch cũ");
 
-        const bookRes = await fetch(`http://127.0.0.1:5000/appointments/${newAptId}/book`, {
+        const bookRes = await fetch(`${API_BASE}/appointments/${newAptId}/book`, {
             method: 'POST',
             headers: { 'Authorization': `Bearer ${token}` }
         });
@@ -145,7 +146,7 @@ const SessionInfoPage = () => {
     const targetAptId = sessionData.id;
     
     try {
-        const res = await fetch(`http://127.0.0.1:5000/appointments/${targetAptId}`, {
+        const res = await fetch(`${API_BASE}/appointments/${targetAptId}`, {
             method: 'PUT', // API đổi lịch dùng PUT
             headers: { 
                 'Content-Type': 'application/json',

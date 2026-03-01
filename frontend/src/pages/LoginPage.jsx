@@ -1,10 +1,11 @@
+import { API_BASE } from '../config';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './LoginPage.css';
 
 const LoginPage = () => {
   const [error, setError] = useState('');
-  const SSO_ENDPOINT = 'http://127.0.0.1:5000/auth/sso/login-url';
+  const SSO_ENDPOINT = `${API_BASE}/auth/sso/login-url`;
 
   const handleSso = async () => {
     setError('');

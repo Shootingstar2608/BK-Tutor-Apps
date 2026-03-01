@@ -1,3 +1,4 @@
+import { API_BASE } from '../config';
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import { Link, useNavigate } from 'react-router-dom';
@@ -14,7 +15,7 @@ const ResourceMenuPage = () => {
       if (!token) return;
 
       try {
-        const response = await fetch('http://127.0.0.1:5000/auth/profile', {
+        const response = await fetch(`${API_BASE}/auth/profile`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (response.ok) {
